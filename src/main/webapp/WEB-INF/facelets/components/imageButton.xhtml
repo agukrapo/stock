@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/ xhtml1-transitional.dtd">
+<html
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns="http://www.w3.org/1999/xhtml">
+
+<!--image="" reRender="" bean="" action="" value=""-->
+
+<ui:composition>
+
+    <a4j:commandButton image="#{image}" reRender="#{reRender}"
+                       action="#{bean[action]}">
+
+        <ui:insert/>
+
+        <rich:toolTip value="#{value}" showDelay="300"/>
+
+    </a4j:commandButton>
+
+</ui:composition>
+</html>

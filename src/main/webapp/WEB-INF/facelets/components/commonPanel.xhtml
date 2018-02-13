@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/ xhtml1-transitional.dtd">
+<html
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:custom="custom"
+        xmlns="http://www.w3.org/1999/xhtml">
+
+<!--id="" title="" bean="" aceptAction="" cancelAction="" closeAction="" reRender="" onshow=""-->
+
+<ui:component>
+
+    <c:if test="#{empty showWhenRendered}">
+        <c:set var="showWhenRendered" value="false"/>
+    </c:if>
+
+    <rich:modalPanel id="#{id}" autosized="true" resizeable="false" minWidth="300"
+                     onshow="#{onshow}" showWhenRendered="#{showWhenRendered}">
+        <f:facet name="header">#{title}</f:facet>
+
+        <custom:form id="#{id}Form">
+
+            <h:panelGrid id="#{id}PanelGrid">
+
+                <ui:insert/>
+
+                <h:panelGrid cellspacing="10" styleClass="blockAlignCenter">
+                    <h:panelGroup>
+
+                        <a4j:commandButton id="#{id}AcceptButton" value="#{sisMsg.aceptar}"
+                                           action="#{bean[aceptAction]}" style="width:60px" reRender="#{reRender}"
+                                           rendered="#{! empty aceptAction}"
+                                           oncomplete="if(noWarnLevelSeverity()) hidePanel();"/>
+
+                        <rich:spacer width="10" rendered="#{! empty cancelAction}"/>
+                        <a4j:commandButton value="#{sisMsg.cancelar}"
+                                           action="#{bean[cancelAction]}" style="width:60px"
+                                           reRender="#{reRender}" ajaxSingle="true" oncomplete="hidePanel()"
+                                           rendered="#{! empty cancelAction}"/>
+
+                        <rich:spacer width="10" rendered="#{! empty closeAction}"/>
+                        <a4j:commandButton value="#{sisMsg.cerrar}"
+                                           action="#{bean[closeAction]}" style="width:60px"
+                                           reRender="#{reRender}" ajaxSingle="true" oncomplete="hidePanel()"
+                                           rendered="#{! empty closeAction}"/>
+
+                    </h:panelGroup>
+                </h:panelGrid>
+
+                <custom:imageMessages level="ERROR"/>
+
+            </h:panelGrid>
+        </custom:form>
+
+        <script type="text/javascript">
+				function hidePanel() {
+					Richfaces.hideModalPanel('#{id}');
+				}
+
+        </script>
+
+
+    </rich:modalPanel>
+</ui:component>
+</html>

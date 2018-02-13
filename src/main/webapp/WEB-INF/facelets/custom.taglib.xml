@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<!DOCTYPE facelet-taglib PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+        "http://java.sun.com/dtd/facelet-taglib_1_0.dtd">
+
+<facelet-taglib xmlns="http://java.sun.com/JSF/Facelet">
+    <namespace>custom</namespace>
+
+    <tag>
+        <tag-name>imageMessage</tag-name>
+        <source>components/imageMessage.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>imageMessages</tag-name>
+        <source>components/imageMessages.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>form</tag-name>
+        <source>components/form.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>string</tag-name>
+        <source>components/string.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>secret</tag-name>
+        <source>components/secret.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>boolean</tag-name>
+        <source>components/boolean.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>integer</tag-name>
+        <source>components/integer.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>currency</tag-name>
+        <source>components/currency.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>percentage</tag-name>
+        <source>components/percentage.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>textArea</tag-name>
+        <source>components/textArea.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>selectOne</tag-name>
+        <source>components/selectOne.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>actionButton</tag-name>
+        <source>components/actionButton.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>aceptButton</tag-name>
+        <source>components/aceptButton.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>dataTable</tag-name>
+        <source>components/dataTable.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>filterableColumn</tag-name>
+        <source>components/filterableColumn.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>stringColumn</tag-name>
+        <source>components/stringColumn.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>removeColumn</tag-name>
+        <source>components/removeColumn.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>editColumn</tag-name>
+        <source>components/editColumn.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>currencyColumn</tag-name>
+        <source>components/currencyColumn.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>integerColumn</tag-name>
+        <source>components/integerColumn.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>confirmRemoveDialog</tag-name>
+        <source>components/confirmRemoveDialog.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>editPanel</tag-name>
+        <source>components/editPanel.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>commonPanel</tag-name>
+        <source>components/commonPanel.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>addButton</tag-name>
+        <source>components/addButton.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>noPersistence</tag-name>
+        <source>components/noPersistence.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>imageLink</tag-name>
+        <source>components/imageLink.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>outputTextPanel</tag-name>
+        <source>components/outputTextPanel.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>columnsDefinition</tag-name>
+        <source>components/columnsDefinition.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>fieldsDefinition</tag-name>
+        <source>components/fieldsDefinition.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>date</tag-name>
+        <source>components/date.xhtml</source>
+    </tag>
+
+    <tag>
+        <tag-name>imageButton</tag-name>
+        <source>components/imageButton.xhtml</source>
+    </tag>
+
+</facelet-taglib>

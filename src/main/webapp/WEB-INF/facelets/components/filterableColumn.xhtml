@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/ xhtml1-transitional.dtd">
+<html
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns="http://www.w3.org/1999/xhtml"
+>
+
+<!--property="" title="" width=""-->
+
+<ui:composition>
+
+    <rich:column id="#{property}FilterableColumn" title="#{item[property]}" label="#{title}"
+                 filterEvent="onchange" filterBy="#{item[property]}" sortBy="#{item[property]}"
+                 width="#{width}" style="text-align:center;">
+        <f:facet name="header">
+            <h:outputText value="#{title}"/>
+        </f:facet>
+        <h:outputText style="display:block;overflow:hidden;white-space:nowrap;width:#{width}px"
+                      value="#{item[property]}"/>
+    </rich:column>
+
+</ui:composition>
+</html>

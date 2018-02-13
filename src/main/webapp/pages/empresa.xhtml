@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:custom="custom"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/common.xhtml">
+
+    <ui:define name="content">
+
+        <custom:form id="empresaForm">
+
+            <a4j:loadBundle basename="i18n.Empresa" var="msg"/>
+
+            <a4j:keepAlive beanName="empresaController"/>
+
+            <h:panelGrid cellspacing="5" width="100%">
+                <custom:dataTable id="empresaTable" value="#{empresaController.itemList}"
+                                  header="#{msg.listado_empresas}" rows="16">
+
+                    <custom:stringColumn property="nombre" title="#{msg.nombre}" width="400"/>
+
+                    <custom:editColumn>
+                        <f:setPropertyActionListener value="#{item}" target="#{empresaController.currentItem}"/>
+                    </custom:editColumn>
+
+                    <custom:removeColumn>
+                        <f:setPropertyActionListener value="#{item}" target="#{empresaController.currentItem}"/>
+                    </custom:removeColumn>
+
+                </custom:dataTable>
+
+                <custom:addButton bean="#{empresaController}" action="agregar" width="80"/>
+
+            </h:panelGrid>
+        </custom:form>
+
+        <custom:editPanel bean="#{empresaController}" aceptAction="aceptar"
+                          cancelAction="cancelar" reRender="empresaTable">
+
+            <custom:string id="nombreEmpresa" label="#{msg.nombre}"
+                           value="#{empresaController.currentItem.nombre}"/>
+
+        </custom:editPanel>
+
+        <custom:confirmRemoveDialog bean="#{empresaController}" okAction="eliminar"
+                                    cancelAction="cancelar" reRender="empresaTable"/>
+
+    </ui:define>
+
+</ui:composition>

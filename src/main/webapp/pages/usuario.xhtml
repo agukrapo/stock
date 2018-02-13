@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:custom="custom"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/common.xhtml">
+
+    <ui:define name="content">
+
+        <custom:form id="usuarioForm">
+
+            <a4j:loadBundle basename="i18n.Usuario" var="msg"/>
+
+            <a4j:keepAlive beanName="usuarioController"/>
+
+            <h:panelGrid cellspacing="5" width="100%">
+                <custom:dataTable id="usuarioTable" value="#{usuarioController.itemList}"
+                                  header="#{msg.listado_usuarios}" rows="16">
+
+                    <custom:stringColumn property="nombre" title="#{msg.nombre}" width="300"/>
+
+                    <custom:stringColumn property="contraseña" title="#{msg.contraseña}" width="300"/>
+
+                    <custom:editColumn>
+                        <f:setPropertyActionListener value="#{item}" target="#{usuarioController.currentItem}"/>
+                    </custom:editColumn>
+
+                    <custom:removeColumn>
+                        <f:setPropertyActionListener value="#{item}" target="#{usuarioController.currentItem}"/>
+                    </custom:removeColumn>
+
+                </custom:dataTable>
+
+                <custom:addButton bean="#{usuarioController}" action="agregar" width="80"/>
+
+            </h:panelGrid>
+        </custom:form>
+
+        <custom:editPanel bean="#{usuarioController}" aceptAction="aceptar"
+                          cancelAction="cancelar" reRender="usuarioTable">
+
+            <custom:string id="nombreUsuario" label="#{msg.nombre}"
+                           value="#{usuarioController.currentItem.nombre}"/>
+
+            <custom:string id="contrasenaUsuario" label="#{msg.contraseña}"
+                           value="#{usuarioController.currentItem.contraseña}"/>
+
+            <custom:boolean id="superusuario" label="#{msg.superusuario}"
+                            value="#{usuarioController.currentItem.superusuario}"/>
+
+        </custom:editPanel>
+
+        <custom:confirmRemoveDialog bean="#{usuarioController}" okAction="eliminar"
+                                    cancelAction="cancelar" reRender="usuarioTable"/>
+
+    </ui:define>
+
+</ui:composition>

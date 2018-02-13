@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:custom="custom"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/common.xhtml">
+
+    <ui:define name="content">
+
+        <custom:form id="transaccionForm">
+
+            <a4j:loadBundle basename="i18n.Transaccion" var="msg"/>
+
+            <a4j:keepAlive beanName="transaccionController"/>
+
+            <h:panelGrid width="100%">
+
+                <h:panelGrid columns="5" cellpadding="5" styleClass="blockAlignCenter">
+                    <custom:selectOne id="periodo" label="#{msg.periodo}"
+                                      value="#{transaccionController.periodo}" labelStyle="smallLabelColumn">
+                        <f:selectItems value="#{transaccionController.periodos}"/>
+                        <a4j:support event="onchange" reRender="transaccionForm"/>
+                    </custom:selectOne>
+
+                    <a4j:commandButton value="#{msg.buscar}" reRender="transaccionForm"
+                                       action="#{transaccionController.buscarTransacciones}"/>
+
+                </h:panelGrid>
+
+                <h:panelGrid columns="8" cellpadding="5" styleClass="blockAlignCenter">
+                    <custom:date id="dia" label="#{msg.dia}" rendered="#{transaccionController.periodoDiario}"
+                                 labelStyle="smallLabelColumn" value="#{transaccionController.dia}"/>
+
+                    <custom:selectOne id="mes" label="#{msg.mes}" rendered="#{transaccionController.periodoMensual}"
+                                      value="#{transaccionController.mes}" labelStyle="smallLabelColumn">
+                        <f:selectItems value="#{transaccionController.meses}"/>
+                    </custom:selectOne>
+
+                    <custom:selectOne id="anio" label="#{msg.anio}" value="#{transaccionController.anio}"
+                                      rendered="#{transaccionController.periodoMensual || transaccionController.periodoAnual}"
+                                      labelStyle="smallLabelColumn">
+                        <f:selectItems value="#{transaccionController.anios}"/>
+                    </custom:selectOne>
+                </h:panelGrid>
+
+                <custom:dataTable id="transaccionTable" value="#{transaccionController.itemList}"
+                                  header="#{msg.listado_transacciones}" rows="13">
+
+                    <custom:stringColumn property="codigoArticulo" title="#{msg.codigo}" width="150"/>
+
+                    <custom:stringColumn property="nombreCategoriaArticulo" title="#{msg.categoria}" width="80"/>
+
+                    <custom:stringColumn property="nombreTalleArticulo" title="#{msg.talle}" width="80"/>
+
+                    <custom:stringColumn property="nombreProveedorArticulo" title="#{msg.proveedor}"/>
+
+                    <custom:currencyColumn property="precioUnitarioArticulo" title="#{msg.precio_unitario}" width="80"/>
+
+                    <custom:currencyColumn property="costoArticulo" title="#{msg.costo}" width="80"/>
+
+                    <custom:integerColumn property="cantidad" title="#{msg.cantidad}" width="80"/>
+
+                </custom:dataTable>
+
+                <h:panelGrid columns="2" columnClasses="bold, textAlignRight wide" styleClass="blockAlignCenter"
+                             cellspacing="5"
+                             rendered="#{! empty transaccionController.itemList}">
+
+                    <h:outputText value="#{msg.totales}:"/>
+                    <rich:spacer/>
+
+                    <h:outputText value="#{msg.precio_unitario}"/>
+                    <h:outputText value="#{transaccionController.totales[1]}">
+                        <f:convertNumber type="currency" currencySymbol="$" locale="en"/>
+                    </h:outputText>
+
+                    <h:outputText value="#{msg.costo}"/>
+                    <h:outputText value="#{transaccionController.totales[0]}">
+                        <f:convertNumber type="currency" currencySymbol="$" locale="en"/>
+                    </h:outputText>
+
+                    <h:outputText value="#{msg.cantidad}"/>
+                    <h:outputText value="#{transaccionController.totales[2]}"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </custom:form>
+
+
+    </ui:define>
+
+</ui:composition>

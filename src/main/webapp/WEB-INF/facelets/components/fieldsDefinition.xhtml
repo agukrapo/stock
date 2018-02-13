@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/ xhtml1-transitional.dtd">
+<html
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:c="http://java.sun.com/jstl/core"
+        xmlns:custom="custom"
+        xmlns="http://www.w3.org/1999/xhtml">
+
+<!--value="" entity=""-->
+
+<ui:composition>
+
+    <c:forEach items="#{value}" var="fieldDef">
+
+        <c:set var="property" value="#{fieldDef.property}"/>
+        <c:set var="id" value="#{fieldDef.id}"/>
+
+        <c:if test="#{fieldDef.type eq 'string'}">
+            <custom:string id="#{id}" label="#{msg[property]}" value="#{entity[property]}"/>
+        </c:if>
+
+    </c:forEach>
+
+</ui:composition>
+</html>

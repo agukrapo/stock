@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/pages/login.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>start</from-outcome>
+            <to-view-id>/pages/start.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>talle</from-outcome>
+            <to-view-id>/pages/talle.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>usuario</from-outcome>
+            <to-view-id>/pages/usuario.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>categoria</from-outcome>
+            <to-view-id>/pages/categoria.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>empresa</from-outcome>
+            <to-view-id>/pages/empresa.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>parametrosStock</from-outcome>
+            <to-view-id>/pages/parametrosStock.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>articulo</from-outcome>
+            <to-view-id>/pages/articulo.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>transaccion</from-outcome>
+            <to-view-id>/pages/transaccion.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

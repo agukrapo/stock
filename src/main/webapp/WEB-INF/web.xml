@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <display-name>Sistema de Stock</display-name>
+    <filter>
+        <display-name>Custom Filter</display-name>
+        <filter-name>custom</filter-name>
+        <filter-class>ar.com.ak.util.CustomFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>custom</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+    <!-- Facelets -->
+    <context-param>
+        <param-name>facelets.DEVELOPMENT</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>facelets.RECREATE_VALUE_EXPRESSION_ON_BUILD_BEFORE_RESTORE</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <context-param>
+        <param-name>facelets.BUILD_BEFORE_RESTORE</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <context-param>
+        <param-name>facelets.LIBRARIES</param-name>
+        <param-value>/WEB-INF/facelets/custom.taglib.xml</param-value>
+    </context-param>
+    <!-- ajax4jsf & RichFaces -->
+    <context-param>
+        <param-name>org.richfaces.SKIN</param-name>
+        <param-value>classic</param-value>
+    </context-param>
+    <!--	<context-param>-->
+    <!--		<param-name>org.richfaces.CONTROL_SKINNING</param-name>-->
+    <!--		<param-value>enable</param-value>-->
+    <!--	</context-param>-->
+    <!--	<context-param>-->
+    <!--		<param-name>org.ajax4jsf.ENCRYPT_RESOURCE_DATA</param-name>-->
+    <!--		<param-value>true</param-value>-->
+    <!--	</context-param>-->
+    <!--	<context-param>-->
+    <!--		<param-name>org.ajax4jsf.ENCRYPT_PASSWORD</param-name>-->
+    <!--		<param-value>asda</param-value>-->
+    <!--	</context-param>-->
+    <filter>
+        <display-name>RichFaces Filter</display-name>
+        <filter-name>richfaces</filter-name>
+        <filter-class>org.ajax4jsf.Filter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>richfaces</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
+    <!-- Faces Servlet -->
+    <context-param>
+        <param-name>javax.faces.CONFIG_FILES</param-name>
+        <param-value>
+            /WEB-INF/faces-config-files/application.xml,/WEB-INF/faces-config-files/managed-bean.xml,/WEB-INF/faces-config-files/navigation-rule.xml,/WEB-INF/faces-config-files/converter.xml,/WEB-INF/faces-config-files/validator.xml
+        </param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>server</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+        <param-value>.xhtml</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.faces</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>0</session-timeout>
+    </session-config>
+</web-app>

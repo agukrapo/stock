@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:custom="custom"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/minimal.xhtml">
+
+    <ui:define name="body">
+
+        <a4j:loadBundle basename="i18n.Error" var="msg"/>
+
+        <custom:form id="errorForm">
+
+            <rich:panel styleClass="errorPanel">
+                <f:facet name="header">#{msg.error}</f:facet>
+
+                <h:panelGrid cellspacing="5">
+
+                    <h:panelGrid columns="2" cellspacing="10" styleClass="blockAlignCenter">
+                        <h:graphicImage url="/image/error-big.png"/>
+
+                        <h:outputText value="#{msg.mensaje_error}"/>
+
+                    </h:panelGrid>
+
+                    <custom:actionButton id="errorButton" bean="#{applicationController}" action="goToLoginController"
+                                         value="#{msg.continuar}" width="90"/>
+
+                </h:panelGrid>
+
+            </rich:panel>
+
+        </custom:form>
+
+    </ui:define>
+</ui:composition>

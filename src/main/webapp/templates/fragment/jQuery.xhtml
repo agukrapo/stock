@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns="http://www.w3.org/1999/xhtml">
+
+    <a4j:loadScript src="resource://jquery.js"/>
+
+    <a4j:outputPanel ajaxRendered="true">
+        <script type="text/javascript">
+			jQuery(document).ready(function() {
+
+				jQuery("input:not(:button):not(:image):enabled[readonly!='readonly'], textarea:enabled[readonly!='readonly']")
+					.focus(function(){jQuery(this).css('border-style', 'groove');})
+					.blur(function(){jQuery(this).css('border-style', 'inset');})
+					.mouseover(function(){jQuery(this).css('border-color', '#{a4jSkin.headerBackgroundColor}');})
+					.mouseout(function(){jQuery(this).css('border-color', '#{a4jSkin.tableBorderColor}');})
+					.keypress(function(event){supressEnter(event);});
+
+				jQuery('select:enabled')
+					.focus(function(){jQuery(this).css('border-style', 'groove');})
+					.blur(function(){jQuery(this).css('border-style', 'inset');})
+					.mouseover(function(){jQuery(this).css('border-color', '#{a4jSkin.headerBackgroundColor}');})
+					.mouseout(function(){jQuery(this).css('border-color', '#{a4jSkin.tableBorderColor}');})
+					.keypress(function(event){supressEnter(event);});
+
+				jQuery('input:button:enabled')
+					.focus(function(){jQuery(this).css('border-style', 'groove');})
+					.blur(function(){jQuery(this).css('border-style', 'outset');})
+					.mouseover(function(){jQuery(this).css('border-color', 'black');})
+					.mouseout(function(){jQuery(this).css('border-color', '#{a4jSkin.tableBorderColor}');});
+
+				jQuery('input:image:enabled, .imageAsButton, .rich-datascr-inact')
+					.focus(function() {
+						jQuery(this)
+							.css('background-color', '#{a4jSkin.headerBackgroundColor}')
+							.css('color', 'white');
+					})
+					.blur(function() {
+						jQuery(this)
+							.css('background-color', 'transparent')
+							.css('color', '#{a4jSkin.generalTextColor}');
+					})
+					.mouseover(function() {
+						jQuery(this)
+							.css('background-color', '#{a4jSkin.headerBackgroundColor}')
+							.css('color', 'white');
+					})
+					.mouseout(function() {
+						jQuery(this)
+							.css('background-color', 'transparent')
+							.css('color', '#{a4jSkin.generalTextColor}');
+					});
+
+				jQuery('select>option')
+					.css('padding-left', '2px');
+				
+				jQuery('select>option:odd')
+					.css('background-color', '#{applicationController.tableOddRowColor}')
+					.css('border-bottom', '1px solid #{a4jSkin.tableBorderColor}')
+					.css('border-top', '1px solid #{a4jSkin.tableBorderColor}');
+
+				jQuery('.rich-filter-input')
+					.blur(function(){lastFocusedField = this;})
+					.css('width', '200px;');
+			});
+	
+			function supressEnter(event) {
+				if (event.keyCode == 13) {
+					event.preventDefault();
+				}
+			};
+
+
+        </script>
+
+    </a4j:outputPanel>
+
+</ui:composition>	

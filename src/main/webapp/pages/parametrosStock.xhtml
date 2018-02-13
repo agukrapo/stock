@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:custom="custom"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/common.xhtml">
+
+    <ui:define name="content">
+
+        <custom:form id="parametrosStockForm">
+
+            <a4j:loadBundle basename="i18n.ParametrosStock" var="msg"/>
+
+            <a4j:keepAlive beanName="parametrosStockController"/>
+
+            <rich:spacer height="20"/>
+
+            <h:panelGrid columns="4" width="400" styleClass="blockAlignCenter">
+
+                <custom:integer id="stockMinimo" label="#{msg.stock_minimo}"
+                                value="#{parametrosStockController.currentItem.stockMinimo}"/>
+
+                <custom:percentage id="coeficientePrecio" label="#{msg.coeficiente_precio_inicial}"
+                                   value="#{parametrosStockController.currentItem.coeficientePrecioInicial}"/>
+
+                <custom:selectOne id="proveedorPorDefecto" label="#{msg.proveedor_por_defecto}"
+                                  value="#{parametrosStockController.currentItem.proveedorPorDefecto}"
+                                  required="true">
+                    <f:selectItems value="#{parametrosStockController.proveedores}"/>
+                </custom:selectOne>
+
+                <custom:selectOne id="categoriaPorDefecto" label="#{msg.categoria_por_defecto}"
+                                  value="#{parametrosStockController.currentItem.categoriaPorDefecto}"
+                                  required="true">
+                    <f:selectItems value="#{parametrosStockController.categorias}"/>
+                </custom:selectOne>
+
+                <custom:selectOne id="tallePorDefecto" label="#{msg.talle_por_defecto}"
+                                  value="#{parametrosStockController.currentItem.tallePorDefecto}"
+                                  required="true">
+                    <f:selectItems value="#{parametrosStockController.talles}"/>
+                </custom:selectOne>
+
+            </h:panelGrid>
+
+            <rich:spacer height="10"/>
+
+            <custom:aceptButton id="aceptar" bean="#{parametrosStockController}"
+                                action="aceptar" reRender="parametrosStockForm" width="80"/>
+
+        </custom:form>
+
+    </ui:define>
+
+</ui:composition>

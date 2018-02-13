@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#pages#login.xhtml" NAME="output"
+    PATH="/pages/login.xhtml" TARGET="rules:#pages#login.xhtml"
+    TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="start::#pages#start.xhtml" NAME="output1"
+    PATH="/pages/start.xhtml" TARGET="rules:#pages#start.xhtml"
+    TITLE="start" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="talle::#pages#talle.xhtml" NAME="output2"
+    PATH="/pages/talle.xhtml" TARGET="rules:#pages#talle.xhtml"
+    TITLE="talle" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="usuario::#pages#usuario.xhtml"
+    NAME="output3" PATH="/pages/usuario.xhtml"
+    TARGET="rules:#pages#usuario.xhtml" TITLE="usuario" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="categoria::#pages#categoria.xhtml"
+    NAME="output4" PATH="/pages/categoria.xhtml"
+    TARGET="rules:#pages#categoria.xhtml" TITLE="categoria" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="empresa::#pages#empresa.xhtml"
+    NAME="output5" PATH="/pages/empresa.xhtml"
+    TARGET="rules:#pages#empresa.xhtml" TITLE="empresa" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="parametrosStock::#pages#parametrosStock.xhtml" NAME="output6"
+    PATH="/pages/parametrosStock.xhtml"
+    TARGET="rules:#pages#parametrosStock.xhtml" TITLE="parametrosStock" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="articulo::#pages#articulo.xhtml"
+    NAME="output7" PATH="/pages/articulo.xhtml"
+    TARGET="rules:#pages#articulo.xhtml" TITLE="articulo" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="transaccion::#pages#transaccion.xhtml"
+    NAME="output8" PATH="/pages/transaccion.xhtml"
+    TARGET="rules:#pages#transaccion.xhtml" TITLE="transaccion" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#start.xhtml" PATH="/pages/start.xhtml"
+  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#talle.xhtml" PATH="/pages/talle.xhtml"
+  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#usuario.xhtml"
+  PATH="/pages/usuario.xhtml" SHAPE="288,465,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#empresa.xhtml"
+  PATH="/pages/empresa.xhtml" SHAPE="304,753,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#categoria.xhtml"
+  PATH="/pages/categoria.xhtml" SHAPE="304,529,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#parametrosStock.xhtml"
+  PATH="/pages/parametrosStock.xhtml" SHAPE="304,561,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#articulo.xhtml"
+  PATH="/pages/articulo.xhtml" SHAPE="304,593,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#login.xhtml" PATH="/pages/login.xhtml"
+  SHAPE="304,481,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#transaccion.xhtml"
+  PATH="/pages/transaccion.xhtml" SHAPE="304,513,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

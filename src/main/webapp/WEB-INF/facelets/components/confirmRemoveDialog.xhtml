@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/ xhtml1-transitional.dtd">
+<html
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:custom="custom"
+        xmlns="http://www.w3.org/1999/xhtml">
+
+<!--bean="" okAction="" cancelAction="" reRender=""-->
+
+<ui:component>
+
+    <rich:modalPanel id="confirmRemovePanel" autosized="true" resizeable="false">
+        <f:facet name="header">#{sisMsg.advertencia}</f:facet>
+        <a4j:form>
+            <h:panelGrid>
+                <h:panelGrid columns="2" cellspacing="10" styleClass="blockAlignCenter">
+                    <h:graphicImage url="/image/warning-big.png"/>
+
+                    <h:outputText styleClass="nowrap" value="#{sisMsg.desea_eliminar_el_registro}"/>
+
+                </h:panelGrid>
+
+                <h:panelGrid columns="2" cellspacing="10" styleClass="blockAlignCenter">
+                    <a4j:commandButton value="#{sisMsg.si}" action="#{bean[okAction]}"
+                                       style="width:60px" reRender="#{reRender}"
+                                       oncomplete="if(noWarnLevelSeverity()) #{rich:component('confirmRemovePanel')}.hide()"/>
+
+                    <a4j:commandButton value="#{sisMsg.no}" action="#{bean[cancelAction]}"
+                                       style="width:60px" reRender="#{reRender}">
+                        <rich:componentControl for="confirmRemovePanel" operation="hide" event="onclick"/>
+                    </a4j:commandButton>
+                </h:panelGrid>
+
+                <custom:imageMessages level="ERROR"/>
+
+            </h:panelGrid>
+        </a4j:form>
+    </rich:modalPanel>
+
+
+</ui:component>
+</html>

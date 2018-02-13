@@ -1,0 +1,143 @@
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+body {
+	background-color: #484848;
+	overflow: hidden;
+}
+
+.mainPanel {
+	width: 900px;
+	height: 600px;
+
+	background-color: #f3f2f2;
+	border-color: #c0c0c0;
+
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.mainPanelBody {
+	padding: 0px;
+	margin: 0px;
+}
+
+.userSection {
+	background-image: url("../image/userSectionBg.png");
+	background-repeat: repeat-x;
+	height: 25px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.contentSection {
+	height: 535px;
+	padding: 5px	
+}
+
+.loginPanel {
+	margin-top: 170px;
+	margin-left: auto;
+	margin-right: auto;
+	
+	width: 450px;
+}
+
+.errorPanel {
+	white-space: nowrap;
+	margin-top: 170px;
+	margin-left: auto;
+	margin-right: auto;
+	
+	width: 280px;
+}
+
+.smallLabelColumn {
+	text-align: right;
+}
+
+.codigoBarraPanel {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 25px;
+	width: 450px;
+	padding: 15px;
+	background-color: #E0E0E0;
+}
+
+.importarExcelLog {
+	width: 420px;
+	height: 150px;
+	border-color: #707070;
+	background-color: #E0E0E0;
+	overflow: scroll;
+}
+
+.columnaDestacada {
+	width: 200px;
+	text-align: right;
+}
+
+.stockBien {
+	color: Darkgreen;
+}
+
+.stockBajo {
+	color: Darkorange;
+}
+
+.stockCero {
+	color: DarkRed;
+	text-decoration: blink;
+}
+
+/*genericos*/
+.blockAlignCenter {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.bold {
+	font-weight: bold;	
+}
+
+.textAlignRight {
+	text-align: right;
+}
+
+input[readonly='readonly'] {
+	background-color: #E0E0E0;
+	background-image: none;
+}
+
+textarea[readonly='readonly'] {
+	background-color: #E0E0E0;
+	background-image: none;
+}
+	
+.textoXXGrande {
+	font-size: xx-large;
+}
+
+.textoGrande {
+	font-size: large;
+}
+
+.wide {
+	width: 150px;
+}
+
+.wider {
+	width: 600px;
+}
+
+.colorGray {
+	color: gray;	
+}

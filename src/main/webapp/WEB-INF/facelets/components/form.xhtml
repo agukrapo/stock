@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/ xhtml1-transitional.dtd">
+<html
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns="http://www.w3.org/1999/xhtml"
+>
+
+<!--id=""-->
+
+<ui:composition>
+
+    <a4j:form id="#{id}" prependId="false" styleClass="#{id}">
+
+        <script type="text/javascript">
+				jQuery(document).ready(function() {
+					focusFirstField('#{focusClientId}', '#{id}');
+				});
+
+        </script>
+
+        <a4j:outputPanel ajaxRendered="true">
+            <script type="text/javascript">
+					function focusError(clientId) {
+	
+						if (clientId != null &amp;&amp; clientId != 'none') {
+							var selector = '#' + clientId; 
+							jQuery(selector).focus();
+						}
+	
+					}
+				
+					jQuery(document).ready(function() {
+						focusError('#{focusClientId}');
+					});
+
+            </script>
+        </a4j:outputPanel>
+
+        <ui:insert/>
+
+    </a4j:form>
+
+</ui:composition>
+</html>

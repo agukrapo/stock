@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:custom="custom"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/common.xhtml">
+
+    <ui:define name="content">
+
+        <custom:form id="talleForm">
+
+            <a4j:loadBundle basename="i18n.Talle" var="msg"/>
+
+            <a4j:keepAlive beanName="talleController"/>
+
+            <h:panelGrid cellspacing="5" width="100%">
+                <custom:dataTable id="talleTable" value="#{talleController.itemList}"
+                                  header="#{msg.listado_talles}" rows="16">
+
+                    <custom:stringColumn property="nombre" title="#{msg.nombre}" width="400"/>
+
+                    <custom:editColumn>
+                        <f:setPropertyActionListener value="#{item}" target="#{talleController.currentItem}"/>
+                    </custom:editColumn>
+
+                    <custom:removeColumn>
+                        <f:setPropertyActionListener value="#{item}" target="#{talleController.currentItem}"/>
+                    </custom:removeColumn>
+
+                </custom:dataTable>
+
+                <custom:addButton bean="#{talleController}" action="agregar" width="80"/>
+
+            </h:panelGrid>
+        </custom:form>
+
+        <custom:editPanel bean="#{talleController}" aceptAction="aceptar"
+                          cancelAction="cancelar" reRender="talleTable">
+
+            <custom:string id="nombreTalle" label="#{msg.nombre}"
+                           value="#{talleController.currentItem.nombre}"/>
+
+        </custom:editPanel>
+
+        <custom:confirmRemoveDialog bean="#{talleController}" okAction="eliminar"
+                                    cancelAction="cancelar" reRender="talleTable"/>
+
+    </ui:define>
+
+</ui:composition>

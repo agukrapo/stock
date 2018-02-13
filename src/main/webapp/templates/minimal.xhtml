@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <a4j:include viewId="/templates/fragment/head.xhtml"/>
+</head>
+<body id="body" class="rich-container">
+
+<rich:panel id="mainPanel" styleClass="mainPanel" bodyClass="mainPanelBody">
+
+    <ui:insert name="body"/>
+
+</rich:panel>
+
+
+<h:panelGrid styleClass="blockAlignCenter rich-panel-body" style="margin-top:0px;padding:0px">
+    <h:panelGroup>
+        <h:outputText value="#{sisMsg.development}" rendered="#{applicationController.development}"
+                      style="color:white;text-weight:bold"/>
+        <rich:spacer width="5" rendered="#{applicationController.development}"/>
+
+        <h:outputText value="#{sisMsg.version} #{applicationController.appVersion}"/>
+    </h:panelGroup>
+</h:panelGrid>
+
+<a4j:include viewId="/templates/fragment/status.xhtml"/>
+<a4j:include viewId="/templates/fragment/debug.xhtml"/>
+<a4j:include viewId="/templates/fragment/jQuery.xhtml"/>
+
+</body>
+</html>

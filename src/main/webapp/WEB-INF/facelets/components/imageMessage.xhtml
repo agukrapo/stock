@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/ xhtml1-transitional.dtd">
+<html
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns="http://www.w3.org/1999/xhtml"
+>
+
+<!--id="" for=""-->
+
+<ui:component>
+    <h:panelGroup id="#{id}#{for}PanelGroup" style="width:16px;height:16px;">
+        <rich:message id="#{id}#{for}Message" for="#{for}" showDetail="false"
+                      style="width:16px;height:16px">
+            <f:facet name="errorMarker">
+                <h:graphicImage alt="" id="#{id}#{for}GraphicImage"
+                                style="width:16px;height:16px;"
+                                value="/image/error.png"/>
+            </f:facet>
+        </rich:message>
+        <rich:toolTip for="#{id}#{for}PanelGroup" hideDelay="200">
+            <rich:message for="#{for}" showDetail="true"/>
+        </rich:toolTip>
+    </h:panelGroup>
+
+</ui:component>
+</html>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:custom="custom"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/common.xhtml">
+
+    <ui:define name="content">
+
+        <custom:form id="articuloForm">
+
+            <a4j:loadBundle basename="i18n.Articulo" var="msg"/>
+
+            <a4j:keepAlive beanName="articuloController"/>
+
+            <h:panelGrid columns="12" cellpadding="5">
+
+                <h:outputText value="#{msg.filtrar_por}"/>
+                <rich:spacer/>
+                <rich:spacer/>
+                <rich:spacer/>
+                <custom:boolean id="filtroStockBajo" label="#{msg.stock_bajo}"
+                                value="#{articuloController.filtroStockBajo}" labelStyle="smallLabelColumn">
+                    <a4j:support action="#{articuloController.reiniciar}" reRender="articuloForm"
+                                 event="onchange"/>
+                </custom:boolean>
+                <rich:spacer/>
+                <rich:spacer/>
+                <rich:spacer/>
+                <rich:spacer/>
+
+                <custom:selectOne id="filtroProveedor" label="#{msg.proveedor}"
+                                  value="#{articuloController.filtroProveedor}" labelStyle="smallLabelColumn">
+                    <f:selectItem itemLabel=""/>
+                    <f:selectItems value="#{articuloController.proveedores}"/>
+                    <a4j:support action="#{articuloController.reiniciar}" reRender="articuloForm"
+                                 event="onchange"/>
+                </custom:selectOne>
+
+                <custom:selectOne id="filtroCategoria" label="#{msg.categoria}"
+                                  value="#{articuloController.filtroCategoria}" labelStyle="smallLabelColumn">
+                    <f:selectItem itemLabel=""/>
+                    <f:selectItems value="#{articuloController.categorias}"/>
+                    <a4j:support action="#{articuloController.reiniciar}" reRender="articuloForm"
+                                 event="onchange"/>
+                </custom:selectOne>
+
+                <custom:selectOne id="filtroTalle" label="#{msg.talle}"
+                                  value="#{articuloController.filtroTalle}" labelStyle="smallLabelColumn">
+                    <f:selectItem itemLabel=""/>
+                    <f:selectItems value="#{articuloController.talles}"/>
+                    <a4j:support action="#{articuloController.reiniciar}" reRender="articuloForm"
+                                 event="onchange"/>
+                </custom:selectOne>
+            </h:panelGrid>
+
+            <h:panelGrid cellspacing="5" width="100%">
+                <custom:dataTable id="articuloTable" value="#{articuloController.itemList}"
+                                  header="#{msg.listado_articulos}" rows="13"
+                                  bean="#{articuloController}" printAction="exportarListado">
+
+                    <custom:stringColumn property="codigo" title="#{msg.codigo}" width="150"/>
+
+                    <custom:stringColumn property="descripcion" title="#{msg.descripcion}" width="400"/>
+
+                    <custom:stringColumn property="talle" title="#{msg.talle}" width="80"/>
+
+                    <custom:currencyColumn property="precioUnitario" title="#{msg.precio_unitario}" width="80"/>
+
+                    <custom:integerColumn property="stock" title="#{msg.stock}" width="60"/>
+
+                    <custom:editColumn>
+                        <f:setPropertyActionListener value="#{item}" target="#{articuloController.currentItem}"/>
+                    </custom:editColumn>
+
+                    <custom:removeColumn>
+                        <f:setPropertyActionListener value="#{item}" target="#{articuloController.currentItem}"/>
+                    </custom:removeColumn>
+
+                </custom:dataTable>
+
+                <custom:addButton bean="#{articuloController}" action="agregar" width="80"/>
+
+                <a4j:commandLink value="#{msg.importar_excel}" action="#{articuloController.importarExcel}"
+                                 reRender="importarExcelPanel"
+                                 oncomplete="#{rich:component('importarExcelPanel')}.show()"/>
+
+                <a href="/stock/misc/plantilla_vacia.xls">
+                    #{msg.descargar_plantilla_vacia}
+                </a>
+
+            </h:panelGrid>
+        </custom:form>
+
+        <custom:commonPanel id="editPanel" title="#{sisMsg.editar}"
+                            bean="#{articuloController}" aceptAction="aceptar" onshow="focusById('codigoArticulo')"
+                            cancelAction="cancelar" reRender="articuloForm">
+
+            <h:panelGrid columns="5">
+
+                <custom:string id="codigoArticulo" label="#{msg.codigo}"
+                               value="#{articuloController.currentItem.codigo}"/>
+                <a4j:commandButton image="/image/run.png" action="#{articuloController.generarCodigo}"
+                                   ajaxSingle="true" process="proveedorArticulo,categoriaArticulo,talleArticulo"
+                                   reRender="codigoArticulo">
+                    <rich:toolTip value="#{msg.generar_codigo}" showDelay="300"/>
+                </a4j:commandButton>
+
+                <custom:string id="codigoBarraArticulo" label="#{msg.codigo_barra}"
+                               value="#{articuloController.currentItem.codigoBarra}"/>
+                <!--<rich:spacer />-->
+
+                <custom:textArea id="descripcionArticulo" label="#{msg.descripcion}"
+                                 value="#{articuloController.currentItem.descripcion}"/>
+                <!--<rich:spacer />-->
+
+                <custom:currency id="costoArticulo" label="#{msg.costo}"
+                                 value="#{articuloController.currentItem.costo}"/>
+                <!--<rich:spacer />-->
+
+                <custom:percentage id="coeficientePrecioArticulo" label="#{msg.coeficiente_precio}"
+                                   value="#{articuloController.currentItem.coeficientePrecio}"/>
+                <!--<rich:spacer />-->
+
+                <custom:currency id="precioArticulo" label="#{msg.precio_unitario}"
+                                 value="#{articuloController.currentItem.precioUnitario}"/>
+                <a4j:commandButton image="/image/run.png" action="#{articuloController.calcularPrecioUnitario}"
+                                   ajaxSingle="true" process="costoArticulo,coeficientePrecioArticulo"
+                                   reRender="precioArticulo">
+                    <rich:toolTip value="#{msg.calcular_precio_unitario}" showDelay="300"/>
+                </a4j:commandButton>
+
+                <custom:integer id="stockArticulo" label="#{msg.stock}"
+                                value="#{articuloController.currentItem.stock}"/>
+                <!--<rich:spacer />-->
+
+                <custom:selectOne id="proveedorArticulo" label="#{msg.proveedor}"
+                                  value="#{articuloController.currentItem.proveedor}"
+                                  required="true">
+                    <f:selectItems value="#{articuloController.proveedores}"/>
+                </custom:selectOne>
+                <!--<rich:spacer />-->
+
+                <custom:selectOne id="categoriaArticulo" label="#{msg.categoria}"
+                                  value="#{articuloController.currentItem.categoria}"
+                                  required="true">
+                    <f:selectItems value="#{articuloController.categorias}"/>
+                </custom:selectOne>
+                <!--<rich:spacer />-->
+
+                <custom:selectOne id="talleArticulo" label="#{msg.talle}"
+                                  value="#{articuloController.currentItem.talle}"
+                                  required="true">
+                    <f:selectItems value="#{articuloController.talles}"/>
+                </custom:selectOne>
+                <!--<rich:spacer />-->
+
+            </h:panelGrid>
+        </custom:commonPanel>
+
+        <custom:confirmRemoveDialog bean="#{articuloController}" okAction="eliminar"
+                                    cancelAction="cancelar" reRender="articuloTable"/>
+
+        <custom:commonPanel id="importarExcelPanel" title="#{msg.importar_datos}" bean="#{articuloController}"
+                            closeAction="cerrarImportacion" reRender="articuloForm">
+
+            <rich:fileUpload acceptedTypes="xls" maxFilesQuantity="1" immediateUpload="true"
+                             fileUploadListener="#{articuloController.fileUploadListener}"
+                             listHeight="58">
+                <a4j:support event="onfileuploadcomplete" reRender="importarExcelPanelFormPanelGrid"/>
+            </rich:fileUpload>
+
+            <h:panelGrid columns="4">
+                <custom:boolean id="abortarOnErrorBoolean" value="#{articuloController.abortarImportacionError}"
+                                label="#{msg.abortar_operacion_error}">
+                    <a4j:support event="onchange" reRender="importarExcelPanelFormPanelGrid"/>
+                </custom:boolean>
+            </h:panelGrid>
+
+            <h:panelGroup layout="block" styleClass="importarExcelLog">
+                <h:outputText escape="false" value="#{articuloController.log}"/>
+            </h:panelGroup>
+
+        </custom:commonPanel>
+
+    </ui:define>
+
+</ui:composition>

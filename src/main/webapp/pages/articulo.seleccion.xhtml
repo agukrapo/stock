@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:custom="custom"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+    <custom:commonPanel id="seleccionArticuloPanel" title="#{msg.seleccionar_articulo}"
+                        bean="#{procesarArticuloController}"
+                        cancelAction="cerrarSeleccionArticulo" reRender="seleccionArticuloPanel"
+                        showWhenRendered="#{procesarArticuloController.mostrarSeleccionArticulo}">
+
+        <a4j:loadBundle basename="i18n.Articulo" var="msg"/>
+
+        <h:panelGrid columns="12" cellpadding="5">
+
+            <h:outputText value="#{msg.filtrar_por}"/>
+            <rich:spacer/>
+            <rich:spacer/>
+            <rich:spacer/>
+            <custom:boolean id="filtroStockBajo" label="#{msg.stock_bajo}"
+                            value="#{procesarArticuloController.articuloController.filtroStockBajo}"
+                            labelStyle="smallLabelColumn">
+                <a4j:support action="#{procesarArticuloController.articuloController.reiniciar}"
+                             reRender="seleccionArticuloPanel"
+                             event="onchange"/>
+            </custom:boolean>
+            <rich:spacer/>
+            <rich:spacer/>
+            <rich:spacer/>
+            <rich:spacer/>
+
+            <custom:selectOne id="filtroProveedor" label="#{msg.proveedor}"
+                              value="#{procesarArticuloController.articuloController.filtroProveedor}"
+                              labelStyle="smallLabelColumn">
+                <f:selectItem itemLabel=""/>
+                <f:selectItems value="#{procesarArticuloController.articuloController.proveedores}"/>
+                <a4j:support action="#{procesarArticuloController.articuloController.reiniciar}"
+                             reRender="seleccionArticuloPanel"
+                             event="onchange"/>
+            </custom:selectOne>
+
+            <custom:selectOne id="filtroCategoria" label="#{msg.categoria}"
+                              value="#{procesarArticuloController.articuloController.filtroCategoria}"
+                              labelStyle="smallLabelColumn">
+                <f:selectItem itemLabel=""/>
+                <f:selectItems value="#{procesarArticuloController.articuloController.categorias}"/>
+                <a4j:support action="#{procesarArticuloController.articuloController.reiniciar}"
+                             reRender="seleccionArticuloPanel"
+                             event="onchange"/>
+            </custom:selectOne>
+
+            <custom:selectOne id="filtroTalle" label="#{msg.talle}"
+                              value="#{procesarArticuloController.articuloController.filtroTalle}"
+                              labelStyle="smallLabelColumn">
+                <f:selectItem itemLabel=""/>
+                <f:selectItems value="#{procesarArticuloController.articuloController.talles}"/>
+                <a4j:support action="#{procesarArticuloController.articuloController.reiniciar}"
+                             reRender="seleccionArticuloPanel"
+                             event="onchange"/>
+            </custom:selectOne>
+
+        </h:panelGrid>
+
+        <h:panelGrid cellspacing="5" width="100%">
+            <custom:dataTable id="articuloTable" value="#{procesarArticuloController.articuloController.itemList}"
+                              header="#{msg.listado_articulos}" rows="13" seleccionable="true">
+
+                <a4j:support event="onRowClick" reRender="procesarArticuloGrid, seleccionArticuloPanel"
+                             action="#{procesarArticuloController.cerrarSeleccionArticulo}">
+                    <f:setPropertyActionListener value="#{item}"
+                                                 target="#{procesarArticuloController.aProcesar}"/>
+                </a4j:support>
+
+                <custom:stringColumn property="codigo" title="#{msg.codigo}" width="150"/>
+
+                <custom:stringColumn property="descripcion" title="#{msg.descripcion}" width="400"/>
+
+                <custom:stringColumn property="talle" title="#{msg.talle}" width="80"/>
+
+                <custom:currencyColumn property="precioUnitario" title="#{msg.precio_unitario}" width="80"/>
+
+                <custom:integerColumn property="stock" title="#{msg.stock}" width="60"/>
+
+            </custom:dataTable>
+        </h:panelGrid>
+
+    </custom:commonPanel>
+
+</ui:composition>

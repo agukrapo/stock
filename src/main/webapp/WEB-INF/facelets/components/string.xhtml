@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/component/input.xhtml">
+
+    <!--id="" value="" label=""-->
+
+    <ui:define name="field">
+
+        <c:if test="#{empty readonly}">
+            <c:set var="readonly" value="false"/>
+        </c:if>
+
+        <c:if test="#{empty required}">
+            <c:set var="required" value="false"/>
+        </c:if>
+
+        <a4j:loadBundle basename="ValidatorMessages_es_AR" var="validationMsg"/>
+
+        <h:inputText id="#{id}" value="#{value}" style="width:198px;" readonly="#{readonly}"
+                     required="#{required}" requiredMessage="#{validationMsg['validator.notNull']}">
+            <rich:beanValidator/>
+            <ui:insert/>
+        </h:inputText>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/ xhtml1-transitional.dtd">
+<html
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns="http://www.w3.org/1999/xhtml">
+
+<!--action="" image="" label=""-->
+
+<ui:composition>
+
+    <style type="text/css">
+			.startLink {
+				font-size: 14px;
+				display: block;
+				font-weight: bold;
+			}
+			
+			.startLink:hover {
+				background-color: #{a4jSkin.headerBackgroundColor};
+				color: white;
+			}
+			
+			.startLinkImage {
+				border-width: 0
+			}
+
+
+    </style>
+
+    <a4j:commandLink action="#{action}" styleClass="startLink">
+        <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+            <h:graphicImage value="#{image}"
+                            alt="#{label}" styleClass="startLinkImage"/>
+            <h:outputText value="#{label}"/>
+        </h:panelGrid>
+    </a4j:commandLink>
+
+</ui:composition>
+</html>

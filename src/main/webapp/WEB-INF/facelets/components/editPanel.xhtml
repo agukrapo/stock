@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/ xhtml1-transitional.dtd">
+<html
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:custom="custom"
+        xmlns="http://www.w3.org/1999/xhtml">
+
+<!--bean="" aceptAction="" cancelAction="" reRender=""-->
+
+<ui:component>
+
+    <rich:modalPanel id="editPanel" autosized="true" resizeable="false" minWidth="300"
+                     onshow="focusFirstInput()">
+        <f:facet name="header">#{sisMsg.editar}</f:facet>
+
+        <custom:form id="editForm">
+
+            <h:panelGrid styleClass="nowrap">
+
+                <h:panelGrid columns="4">
+                    <ui:insert/>
+                </h:panelGrid>
+
+                <h:panelGrid columns="2" cellspacing="10" styleClass="blockAlignCenter">
+                    <a4j:commandButton value="#{sisMsg.aceptar}" action="#{bean[aceptAction]}"
+                                       style="width:60px" reRender="#{reRender}"
+                                       oncomplete="if(noWarnLevelSeverity()) Richfaces.hideModalPanel('editPanel')"/>
+
+                    <a4j:commandButton value="#{sisMsg.cancelar}" action="#{bean[cancelAction]}"
+                                       style="width:60px" reRender="#{reRender}" ajaxSingle="true"
+                                       oncomplete="#{rich:component('editPanel')}.hide()"/>
+
+                </h:panelGrid>
+
+                <custom:imageMessages level="ERROR"/>
+
+            </h:panelGrid>
+        </custom:form>
+
+        <script type="text/javascript">
+				function focusFirstInput() {
+					jQuery('#editForm *:input:not(:button):not(:image):visible:enabled:first').focus();
+				};
+
+        </script>
+
+    </rich:modalPanel>
+
+
+</ui:component>
+</html>

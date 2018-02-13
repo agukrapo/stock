@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+    <converter>
+        <converter-for-class>java.lang.String</converter-for-class>
+        <converter-class>ar.com.ak.util.converter.StringConverter</converter-class>
+    </converter>
+    <converter>
+        <converter-for-class>ar.com.ak.model.Empresa</converter-for-class>
+        <converter-class>ar.com.ak.util.converter.EmpresaConverter</converter-class>
+    </converter>
+    <converter>
+        <converter-for-class>ar.com.ak.model.Categoria</converter-for-class>
+        <converter-class>ar.com.ak.util.converter.CategoriaConverter</converter-class>
+    </converter>
+    <converter>
+        <converter-for-class>ar.com.ak.model.Talle</converter-for-class>
+        <converter-class>ar.com.ak.util.converter.TalleConverter</converter-class>
+    </converter>
+</faces-config>

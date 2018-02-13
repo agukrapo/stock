@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/component/input.xhtml">
+
+    <!--id="" value="" label=""-->
+
+    <ui:define name="field">
+        <h:selectBooleanCheckbox id="#{id}" value="#{value}">
+            <rich:beanValidator/>
+            <ui:insert/>
+        </h:selectBooleanCheckbox>
+    </ui:define>
+
+</ui:composition>

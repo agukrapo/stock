@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns="http://www.w3.org/1999/xhtml">
+
+    <a4j:loadBundle basename="i18n.Sistema" var="sisMsg"/>
+
+    <title>#{sisMsg.titulo}</title>
+
+    <meta http-equiv="author" content="Krapovickas, Agustin H."/>
+
+    <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"/>
+    <a4j:loadScript src="/script/common.js"/>
+    <a4j:loadStyle src="/style/richfaces-overrides.css"/>
+    <a4j:loadStyle src="/style/common.css"/>
+    <a4j:loadStyle src="/style/component.css"/>
+    <link rel="icon" type="image/vnd.microsoft.icon" href="#{applicationController.faviconPath}"/>
+
+</ui:composition>	

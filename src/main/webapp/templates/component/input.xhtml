@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/ xhtml1-transitional.dtd">
+<html
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:c="http://java.sun.com/jstl/core"
+        xmlns:custom="custom"
+        xmlns="http://www.w3.org/1999/xhtml">
+
+<ui:composition>
+
+    <c:if test="#{empty labelStyle}">
+        <c:set var="labelStyle" value="labelColumn"/>
+    </c:if>
+
+    <c:if test="#{empty rendered}">
+        <c:set var="rendered" value="true"/>
+    </c:if>
+
+    <h:panelGroup rendered="#{rendered}" layout="block" styleClass="#{labelStyle}">
+        <h:outputLabel id="#{id}Label" value="#{label}" for="#{id}"/>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{rendered}" layout="block" styleClass="infoColumn">
+
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{rendered}" id="#{id}FieldContainerPanel" layout="block" styleClass="fieldColum">
+        <ui:insert name="field"/>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{rendered}" layout="block" styleClass="messageColumn">
+        <custom:imageMessage id="inputMessage" for="#{id}"/>
+    </h:panelGroup>
+
+</ui:composition>
+</html>

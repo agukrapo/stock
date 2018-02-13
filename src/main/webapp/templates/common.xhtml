@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:custom="custom"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/minimal.xhtml">
+
+    <ui:define name="body">
+
+        <h:panelGrid width="100%" cellpadding="0" cellspacing="0">
+
+            <a4j:outputPanel ajaxRendered="true">
+                <h:form style="display:none" prependId="false">
+                    <h:inputHidden id="maximumSeverityOrdinal"
+                                   value="#{facesContext.maximumSeverity.ordinal}"/>
+                </h:form>
+            </a4j:outputPanel>
+
+            <h:panelGroup styleClass="userSection" layout="block">
+                <h:form id="userSectionForm" prependId="false">
+                    <h:panelGrid columns="3" styleClass="blockAlignCenter" cellspacing="5">
+                        <h:outputText value="#{sisMsg.usuario}:"/>
+                        <h:outputText styleClass="bold" value="#{sessionController.nombreUsuario}"/>
+                        <a4j:commandButton image="/image/key.png" reRender="cambiarPasswordPanel"
+                                           action="#{sessionController.resetChangePassword}"
+                                           oncomplete="Richfaces.showModalPanel('cambiarPasswordPanel')">
+                            <rich:toolTip value="#{sisMsg.cambiar_contraseña}" showDelay="300"/>
+                        </a4j:commandButton>
+                    </h:panelGrid>
+                </h:form>
+            </h:panelGroup>
+
+            <custom:commonPanel id="cambiarPasswordPanel" title="#{sisMsg.cambiar_contraseña}"
+                                bean="#{sessionController}" aceptAction="changePasword"
+                                cancelAction="resetChangePassword"
+                                reRender="userSectionForm" onshow="focusById('passwordActualString')">
+
+                <h:panelGrid columns="4">
+
+                    <custom:secret id="passwordActualString" value="#{sessionController.currentPass}"
+                                   label="#{sisMsg.contraseña_actual}">
+                        <f:validator validatorId="currentPasswordValidator"/>
+                    </custom:secret>
+
+                    <rich:spacer height="20"/>
+                    <rich:spacer/>
+                    <rich:spacer/>
+                    <rich:spacer/>
+
+                    <custom:secret id="passwordNuevoString" value="#{sessionController.newPass1}"
+                                   label="#{sisMsg.contraseña_nueva}"/>
+
+                    <custom:secret id="repetirPasswordNuevoString" value="#{sessionController.newPass2}"
+                                   label="#{sisMsg.repetir_contraseña_nueva}">
+                        <f:validator validatorId="samePasswordValidator"/>
+                        <f:attribute name="passwordId" value="passwordNuevoString"/>
+                    </custom:secret>
+                </h:panelGrid>
+
+            </custom:commonPanel>
+
+            <custom:form id="toolBarForm">
+                <rich:toolBar id="toolBar" height="30">
+
+                    <rich:toolBarGroup>
+                        <a4j:support event="onitemclick" action="start"/>
+                        <rich:dropDownMenu>
+                            <f:facet name="label">#{sisMsg.inicio}</f:facet>
+                        </rich:dropDownMenu>
+                    </rich:toolBarGroup>
+
+                    <rich:dropDownMenu>
+                        <f:facet name="label">#{sisMsg.configuracion}</f:facet>
+                        <rich:menuItem value="#{sisMsg.articulo}" action="articulo"/>
+                        <rich:menuItem value="#{sisMsg.parametros_stock}" action="parametrosStock"/>
+                        <rich:menuItem value="#{sisMsg.categoria}" action="categoria"/>
+                        <rich:menuItem value="#{sisMsg.empresa}" action="empresa"/>
+                        <rich:menuItem value="#{sisMsg.talle}" action="talle"/>
+                        <rich:menuItem rendered="#{sessionController.usuario.superusuario}"
+                                       value="#{sisMsg.usuario}" action="usuario"/>
+                    </rich:dropDownMenu>
+
+                    <rich:toolBarGroup>
+                        <a4j:support event="onitemclick" action="transaccion"/>
+                        <rich:dropDownMenu>
+                            <f:facet name="label">#{sisMsg.transaccion}</f:facet>
+                        </rich:dropDownMenu>
+                    </rich:toolBarGroup>
+
+                    <rich:toolBarGroup location="right">
+                        <rich:dropDownMenu>
+                            <f:facet name="label">#{sisMsg.cerrar_sesion}</f:facet>
+                        </rich:dropDownMenu>
+                        <a4j:support event="onitemclick" action="#{sessionController.logout}"/>
+                    </rich:toolBarGroup>
+
+                </rich:toolBar>
+            </custom:form>
+
+            <h:panelGroup layout="block" styleClass="contentSection">
+
+                <ui:insert name="content"/>
+
+                <custom:imageMessages level="INFO"/>
+            </h:panelGroup>
+
+        </h:panelGrid>
+    </ui:define>
+
+</ui:composition>

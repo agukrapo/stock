@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:custom="custom"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/common.xhtml">
+
+    <!--controllerBean="" -->
+
+    <ui:define name="content">
+
+        <c:set var="tableId" value="#{controllerBean.crudClassName}Table"/>
+
+        <custom:form id="#{controllerBean.crudClassName}Form">
+
+            <ui:insert name="insideForm"/>
+
+            <a4j:loadBundle basename="i18n.#{controllerBean.crudClassName}" var="msg"/>
+
+            <h:panelGrid cellspacing="5" width="100%">
+
+                <custom:dataTable id="#{tableId}" value="#{controllerBean.itemList}"
+                                  header="#{msg.listado}" rows="#{controllerBean.rows}">
+
+                    <custom:columnsDefinition value="#{controllerBean.columnsDefinition}"/>
+
+                    <custom:editColumn>
+                        <f:setPropertyActionListener value="#{item}" target="#{controllerBean.currentItem}"/>
+                    </custom:editColumn>
+
+                    <custom:removeColumn>
+                        <f:setPropertyActionListener value="#{item}" target="#{controllerBean.currentItem}"/>
+                    </custom:removeColumn>
+
+                </custom:dataTable>
+
+                <custom:addButton bean="#{controllerBean}" action="agregar" width="80"/>
+
+            </h:panelGrid>
+
+        </custom:form>
+
+        <custom:editPanel bean="#{controllerBean}" aceptAction="aceptar"
+                          cancelAction="cancelar" reRender="#{tableId}">
+
+            <custom:fieldsDefinition value="#{controllerBean.fieldsDefinition}"
+                                     entity="#{controllerBean.currentItem}"/>
+
+        </custom:editPanel>
+
+        <custom:confirmRemoveDialog bean="#{controllerBean}" okAction="eliminar"
+                                    cancelAction="cancelar" reRender="#{tableId}"/>
+
+    </ui:define>
+
+</ui:composition>

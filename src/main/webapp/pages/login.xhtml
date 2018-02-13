@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:custom="custom"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/minimal.xhtml">
+
+    <ui:define name="body">
+
+        <a4j:loadBundle basename="i18n.Login" var="msg"/>
+
+        <custom:form id="loginForm">
+
+            <rich:panel styleClass="loginPanel">
+                <f:facet name="header">#{msg.bienvenido}</f:facet>
+
+                <h:panelGrid styleClass="blockAlignCenter" cellspacing="5">
+
+                    <h:panelGrid columns="4">
+                        <custom:string id="nombreUsuario" label="#{msg.nombre_usuario}"
+                                       value="#{loginController.nombre}"
+                                       required="true"/>
+
+                        <custom:secret id="contrasena" label="#{msg.contraseña}" value="#{loginController.contraseña}"
+                                       required="true"/>
+                    </h:panelGrid>
+
+                    <custom:actionButton id="loginAction" value="#{msg.ingresar}"
+                                         bean="#{loginController}" action="login" width="100"/>
+
+                    <custom:imageMessages/>
+
+                </h:panelGrid>
+
+            </rich:panel>
+
+        </custom:form>
+
+    </ui:define>
+</ui:composition>

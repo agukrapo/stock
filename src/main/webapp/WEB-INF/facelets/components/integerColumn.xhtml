@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/ xhtml1-transitional.dtd">
+<html
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:c="http://java.sun.com/jstl/core"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns="http://www.w3.org/1999/xhtml"
+>
+
+<!--property="" title="" width=""-->
+
+<ui:composition>
+
+    <rich:column width="#{width}" title="#{item[property]}" label="#{title}"
+                 sortBy="#{item[property]}" style="text-align:right;">
+        <f:facet name="header">
+            <h:outputText value="#{title}"/>
+        </f:facet>
+        <h:outputText value="#{item[property]}"
+                      style="display:block;overflow:hidden;white-space:nowrap;width:#{width}px"/>
+
+        <c:if test="#{! empty footer}">
+            <f:facet name="footer">
+                <h:outputText value="#{footer}"/>
+            </f:facet>
+        </c:if>
+
+    </rich:column>
+
+</ui:composition>
+</html>

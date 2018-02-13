@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+    <validator>
+        <validator-id>currentPasswordValidator</validator-id>
+        <validator-class>ar.com.ak.util.validator.CurrentPasswordValidator</validator-class>
+    </validator>
+
+    <validator>
+        <validator-id>samePasswordValidator</validator-id>
+        <validator-class>ar.com.ak.util.validator.SamePasswordValidator</validator-class>
+    </validator>
+
+</faces-config>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:custom="custom"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="/templates/common.xhtml">
+
+    <ui:define name="content">
+
+        <custom:form id="procesarArticuloForm">
+
+            <a4j:loadBundle basename="i18n.ProcesarArticulo" var="msg"/>
+            <a4j:loadBundle basename="i18n.Articulo" var="aMsg"/>
+
+            <a4j:keepAlive beanName="procesarArticuloController"/>
+
+            <rich:panel styleClass="codigoBarraPanel">
+                <h:panelGrid columns="5">
+
+                    <custom:string id="codigoBarra" label="#{msg.ingresar_codigo_barra}"
+                                   value="#{procesarArticuloController.codigoBarra}"/>
+                    <a4j:commandButton image="/image/clear.png" action="#{procesarArticuloController.reiniciar}"
+                                       ajaxSingle="true" reRender="procesarArticuloForm, procesarPanel, articulosForm">
+                        <rich:toolTip value="#{msg.limpiar}" showDelay="300"/>
+                    </a4j:commandButton>
+
+                </h:panelGrid>
+            </rich:panel>
+
+            <script type="text/javascript">
+				jQuery(document).ready(function() {
+					jQuery('#codigoBarra').keypress( function(event){ iniciarProceso(event, this); } );
+				});
+
+				function iniciarProceso(event, field) {
+					if (event.keyCode == 13) {
+						if(field.value.length > 0) {
+							buscarArticulo();
+						}
+					}
+				};
+
+            </script>
+
+            <a4j:jsFunction name="buscarArticulo" action="#{procesarArticuloController.buscar}"
+                            reRender="procesarPanel,procesarArticuloForm,articulosForm"/>
+
+            <script type="text/javascript">
+				function showProcesarPanel() {
+					if (#{!empty procesarArticuloController.aProcesar}) {
+						#{rich:component('procesarPanel')}.show();
+					}
+				};
+
+            </script>
+
+        </custom:form>
+
+        <custom:commonPanel id="procesarPanel" title="#{msg.procesar}" bean="#{procesarArticuloController}"
+                            aceptAction="procesar" cancelAction="reiniciar"
+                            reRender="procesarPanel, procesarArticuloForm"
+                            onshow="focusById('procesarPanelFormAcceptButton')"
+                            showWhenRendered="#{procesarArticuloController.mostrarProcesarArticulo}">
+
+            <a4j:outputPanel ajaxRendered="true">
+                <rich:jQuery selector="#procesarArticuloGrid td.subrallar"
+                             query="css('border-bottom', '1px solid #{a4jSkin.tableBorderColor}').css('padding-left', '20px')"/>
+
+                <rich:jQuery selector="#procesarArticuloGrid tr"
+                             query="css('margin-bottom', '20px;')"/>
+
+            </a4j:outputPanel>
+
+            <h:panelGrid id="procesarArticuloGrid" columns="3"
+                         columnClasses="columnaDestacada,columnaDestacada subrallar"
+                         cellspacing="10" cellpadding="15">
+
+                <h:outputText value="#{aMsg.precio_unitario}" styleClass="textoXXGrande nowrap colorGray"/>
+                <h:outputText styleClass="textoXXGrande bold nowrap"
+                              value="#{procesarArticuloController.aProcesar.precioUnitario}">
+                    <f:convertNumber type="currency" currencySymbol="$"/>
+                </h:outputText>
+                <!--<rich:spacer />-->
+
+                <h:outputText value="#{aMsg.stock}" styleClass="textoXXGrande nowrap colorGray"/>
+                <h:panelGroup styleClass="">
+                    <h:outputText
+                            styleClass="textoXXGrande bold nowrap #{procesarArticuloController.aProcesar.stock == 0? 'stockCero': (procesarArticuloController.aProcesar.stock le procesarArticuloController.stockMinimo? 'stockBajo': 'stockBien') }"
+                            value="#{procesarArticuloController.aProcesar.stock}"/>
+                </h:panelGroup>
+                <!--<rich:spacer />-->
+
+                <h:outputText value="#{aMsg.descripcion}" styleClass="textoGrande nowrap colorGray"/>
+                <custom:outputTextPanel styleClass="textoGrande bold nowrap" width="500"
+                                        value="#{procesarArticuloController.aProcesar.descripcion}"/>
+                <!--<rich:spacer />-->
+
+                <h:outputText value="#{aMsg.codigo}" styleClass="textoGrande nowrap colorGray"/>
+                <custom:outputTextPanel styleClass="textoGrande bold nowrap" width="500"
+                                        value="#{procesarArticuloController.aProcesar.codigo}"/>
+                <!--<rich:spacer />-->
+
+                <h:outputText value="#{aMsg.talle}" styleClass="textoGrande nowrap colorGray"/>
+                <custom:outputTextPanel styleClass="textoGrande bold nowrap" width="500"
+                                        value="#{procesarArticuloController.aProcesar.talle}"/>
+                <a4j:commandButton image="/image/find.png" ajaxSingle="true" reRender="seleccionArticuloPanel"
+                                   action="#{procesarArticuloController.buscarArticulosPorTalle}">
+                    <rich:toolTip value="#{msg.buscar_articulos_por_talle}" showDelay="300"/>
+                </a4j:commandButton>
+
+                <h:outputText value="#{aMsg.categoria}" styleClass="textoGrande nowrap colorGray"/>
+                <custom:outputTextPanel styleClass="textoGrande bold nowrap" width="500"
+                                        value="#{procesarArticuloController.aProcesar.categoria}"/>
+                <a4j:commandButton image="/image/find.png" ajaxSingle="true" reRender="seleccionArticuloPanel"
+                                   action="#{procesarArticuloController.buscarArticulosPorCategoria}">
+                    <rich:toolTip value="#{msg.buscar_articulos_por_categoria}" showDelay="300"/>
+                </a4j:commandButton>
+
+                <h:outputText value="#{aMsg.proveedor}" styleClass="textoGrande nowrap colorGray"/>
+                <custom:outputTextPanel styleClass="textoGrande bold nowrap" width="500"
+                                        value="#{procesarArticuloController.aProcesar.proveedor}"/>
+                <a4j:commandButton image="/image/find.png" ajaxSingle="true" reRender="seleccionArticuloPanel"
+                                   action="#{procesarArticuloController.buscarArticulosPorProveedor}">
+                    <rich:toolTip value="#{msg.buscar_articulos_por_proveedor}" showDelay="300"/>
+                </a4j:commandButton>
+
+            </h:panelGrid>
+
+            <rich:spacer height="30"/>
+
+            <h:panelGrid styleClass="blockAlignCenter" columns="4">
+
+                <custom:integer id="cantidad" label="#{msg.cantidad_procesar}"
+                                value="#{procesarArticuloController.cantidad}" required="true"/>
+
+            </h:panelGrid>
+
+        </custom:commonPanel>
+
+        <custom:imageMessages level="ERROR"/>
+
+        <custom:form id="articulosForm">
+            <h:panelGrid cellpading="5" cellspacing="5" width="100%"
+                         rendered="#{!empty procesarArticuloController.articuloList}">
+
+                <custom:dataTable id="articulosTable" value="#{procesarArticuloController.articuloList}"
+                                  header="#{msg.listado_articulos_sin_codigo_de_barra}" rows="10" seleccionable="true">
+
+                    <a4j:support event="onRowClick" reRender="procesarPanel,procesarArticuloForm,articulosForm"
+                                 action="#{procesarArticuloController.asociarCodigoBarraArticulo}">
+                        <f:setPropertyActionListener value="#{item}"
+                                                     target="#{procesarArticuloController.currentArticulo}"/>
+                    </a4j:support>
+
+                    <custom:stringColumn property="codigo" title="#{aMsg.codigo}" width="100"/>
+
+                    <custom:stringColumn property="descripcion" title="#{aMsg.descripcion}" width="400"/>
+
+                    <custom:stringColumn property="proveedor" title="#{aMsg.proveedor}" width="120"/>
+
+                    <custom:stringColumn property="categoria" title="#{aMsg.categoria}" width="120"/>
+
+                    <custom:stringColumn property="talle" title="#{aMsg.talle}" width="80"/>
+
+                </custom:dataTable>
+
+                <h:panelGrid styleClass="blockAlignCenter">
+                    <h:outputText styleClass="bold" value="#{msg.asociar_codigo_barra_articulo}"/>
+                </h:panelGrid>
+
+            </h:panelGrid>
+        </custom:form>
+
+        <ui:include src="/pages/articulo.seleccion.xhtml"/>
+
+    </ui:define>
+
+</ui:composition>
